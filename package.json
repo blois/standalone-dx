@@ -1,0 +1,23 @@
+{
+  "scripts": {
+    "build:src:dev": "webpack --config webpack.dev.js",
+    "build:src:prod": "webpack --config webpack.prod.js",
+    "build:src:size": "webpack --config webpack.size.js"
+  },
+  "dependencies": {
+    "@nteract/data-explorer": "^6.0.2",
+    "react": "^16.3.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "source-map-loader": "^0.2.3",
+    "ts-loader": "^5.3.2",
+    "tslint": "^5.8.0",
+    "typescript": "~2.9.2",
+    "webpack": "^4.28.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.2.0",
+    "webpack-merge": "^4.2.1"
+  }
+}
