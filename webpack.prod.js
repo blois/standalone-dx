@@ -4,7 +4,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    filename: 'controls.min.js',
+    filename: 'dx.min.js',
   },
   optimization: {
     splitChunks: false,

@@ -2,7 +2,13 @@
   "scripts": {
     "build:src:dev": "webpack --config webpack.dev.js",
     "build:src:prod": "webpack --config webpack.prod.js",
-    "build:src:size": "webpack --config webpack.size.js"
+    "build:src:size": "webpack --config webpack.size.js",
+    "test:build:src": "tsc --project test",
+    "test:build": "npm run test:clean && npm run test:build:src",
+    "test:serve": "npm run test:build && node ./test_lib/server.js",
+    "test:clean": "rimraf test_lib",
+    "test:server": "npm-run-all test:clean --parallel test:watch:build test:watch:server",
+    "test:watch:server": "nodemon './test_lib/server.js' --watch './test_lib'"
   },
   "dependencies": {
     "@nteract/data-explorer": "^6.0.2",
@@ -10,8 +16,15 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
+    "@types/node": "^10.12.21",
+    "@types/optimist": "0.0.29",
+    "css-loader": "^2.1.0",
+    "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
+    "optimist": "^0.6.1",
     "rimraf": "^2.6.1",
     "source-map-loader": "^0.2.3",
+    "style-loader": "^0.23.1",
     "ts-loader": "^5.3.2",
     "tslint": "^5.8.0",
     "typescript": "~2.9.2",

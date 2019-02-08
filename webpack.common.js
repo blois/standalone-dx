@@ -3,7 +3,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist/',
     libraryExport: 'default',
-    libraryTarget: 'commonjs',
+    libraryTarget: 'umd',
   },
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
@@ -13,6 +13,13 @@ module.exports = {
   performance: {hints: false},
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ]
+      },
       // All files with a '.ts' or '.tsx' extension will be handled by
       // 'ts-loader'.
       {

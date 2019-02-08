@@ -5,6 +5,6 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   output: {
-    filename: 'controls.dev.js',
+    filename: 'dx.dev.js',
   },
 });
