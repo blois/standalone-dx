@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
       "declaration": true,
-      "lib": ["dom", "es6"],
+      "lib": ["dom", "es6", "es2016"],
       "noEmitOnError": true,
-      "module": "commonjs",
-      "target": "ES5",
+      "module": "ES2015",
+      "target": "ES6",
       "sourceMap": true,
       "outDir": "../lib"
     }

@@ -8,12 +8,14 @@
     "test:serve": "npm run test:build && node ./test_lib/server.js",
     "test:clean": "rimraf test_lib",
     "test:server": "npm-run-all test:clean --parallel test:watch:build test:watch:server",
-    "test:watch:server": "nodemon './test_lib/server.js' --watch './test_lib'"
+    "test:watch:server": "nodemon './test_lib/server.js' --watch './test_lib'",
+    "rollup:dev": "./node_modules/rollup/bin/rollup -c rollup.dev.js"
   },
   "dependencies": {
     "@nteract/data-explorer": "^6.0.2",
     "react": "^16.3.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-table": "^6.9.0"
   },
   "devDependencies": {
     "@types/node": "^10.12.21",
@@ -26,9 +28,14 @@
     "rollup": "^1.1.2",
     "rollup-plugin-amd": "^4.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-embed-css": "^0.4.0",
     "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-typescript": "^1.0.0",
+    "rollup-plugin-typescript2": "^0.19.2",
     "rollup-plugin-uglify-es": "0.0.1",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.23.1",

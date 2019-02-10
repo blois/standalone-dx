@@ -29,6 +29,8 @@ function main() {
   };
 
   https.createServer(httpsOpts, processRequest).listen(argv.port, '0.0.0.0');
+  http.createServer(processRequest).listen(argv.port + 1, '0.0.0.0');
+
 
   console.log(`Server running at https://127.0.0.1:${argv.port}/`);
 }

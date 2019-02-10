@@ -1,8 +1,14 @@
-<script src="../dist/dx.dev.js"></script>
+<!-- <script src="../dist/dx.dev.js"></script> -->
 <style>
 </style>
 <div class="root"></div>
 <script>
+  window.process = {};
+  window.process.env = {};
+</script>
+<script type="module">
+  import * as dx from '../dist/dx.dev.js';
+  // debugger;
   const dataExplorerProps = {
   data: {
     schema: {
@@ -211,6 +217,6 @@
   mediaType: "application/vnd.dataresource+json"
 };
 
-displayDataExplorer(dataExplorerProps, document.querySelector('.root'));
+dx.displayDataExplorer(dataExplorerProps, document.querySelector('.root'));
 </script>
 </body>
