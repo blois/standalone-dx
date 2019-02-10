@@ -2,9 +2,7 @@ import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import json from 'rollup-plugin-json';
-import amd from 'rollup-plugin-amd';
 import postcss from 'rollup-plugin-postcss';
-import embedCSS from 'rollup-plugin-embed-css';
 import builtins from 'rollup-plugin-node-builtins';
 import replace from 'rollup-plugin-replace';
 
@@ -13,89 +11,69 @@ export default {
   input: './src/index.ts',
   plugins: [
     json({
-      // All JSON files will be parsed by default,
-      // but you can also specifically include/exclude files
-      include: 'node_modules/**',
-
       // for tree-shaking, properties will be declared as
       // variables, using either `var` or `const`
-      preferConst: true, // Default: false
-
-      // specify indentation for the generated default export —
-      // defaults to '\t'
-      indent: '  ',
-
+      preferConst: true,
       // ignores indent and generates the smallest code
-      compact: true, // Default: false
-
-      // generate a named export for every property of the JSON object
-      namedExports: true // Default: true
+      compact: true,
     }),
-    // {
-    //   transform ( code, id ) {
-    //     console.log( id );
-    //     if (id.includes('react-table.css')) {
-    //       console.log(code);
-    //     }
-    //   }
-    // },
-    // 
     postcss({
       plugins: []
     }),
     replace({
+      // React: default to node.js production environment.
       'process.env.NODE_ENV': JSON.stringify('production'),
+      // @blueprintjs
       'process.env.BLUEPRINT_NAMESPACE': JSON.stringify('bp3'),
+      // uniqid tries to use process if it's available.
+      'process && process.pid': 'false',
     }),
     builtins(),
     resolve({
-      jsnext: false,
       main: true,
       browser: true,
+      // styled-components' ES6 module doesn't work here-
+      // specifically appears to be an issue with using both
+      // default and named exports?
+      jsnext: false,
       module: false,
     }),
-    // embedCSS(),
-    // amd(),
     commonjs({
       extensions: ['.js', '.ts'],
       include: [ "./index.js", "node_modules/**" ],
       namedExports: {
-        'node_modules/styled-components/index.js': [
-          'css',
-        ],
         'node_modules/react/index.js': [
           'Children',
-          'Component',
-          'PureComponent',
-          'PropTypes',
-          'createElement',
-          'Fragment',
           'cloneElement',
-          'StrictMode',
+          'Component',
+          'createContext',
+          'createElement',
           'createFactory',
           'createRef',
-          'createContext',
+          'Fragment',
           'isValidElement',
           'isValidElementType',
+          'PropTypes',
+          'PureComponent',
+          'StrictMode',
         ],
         'node_modules/react-dom/index.js': [
-          'render',
-          'hydrate',
+          'createPortal',
           'findDOMNode',
+          'hydrate',
+          'render',
           'unmountComponentAtNode',
           'unstable_renderSubtreeIntoContainer',
-          'createPortal',
         ],
         'node_modules/react-is/index.js': [
+          'ForwardRef',
           'isElement',
           'isValidElementType',
-          'ForwardRef',
         ],
       },
     }),
     typescript({
       tsconfig: "src/tsconfig.json",
-      objectHashIgnoreUnknownHack: true,
     }),
   ],
   output: {

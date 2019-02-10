@@ -1,7 +1,5 @@
-dist
+.rpt2_cache
 lib
 node_modules
 test
 test_lib
-.rpt2_cache
-yarn.lock
